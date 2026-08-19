@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chúc Mừng Sinh Nhật Em 💙</title>
+    <meta name="description" content="Trang web chúc mừng sinh nhật bạn gái tone màu xanh dương ngọt ngào và lãng mạn." />
+    <link rel="stylesheet" href="src/style.css" />
+  </head>
+  <body>
+    <!-- Aurora & Star Background -->
+    <div class="aurora-bg"></div>
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- Top floating controls -->
+    <div class="top-controls" id="top-controls">
+      <button class="control-btn" id="music-toggle-btn" title="Bật/Tắt nhạc sinh nhật">
+        🎵 <span>Nhạc nền</span>
+      </button>
+    </div>
+
+    <!-- MÀN HÌNH MỞ ĐẦU (START SCREEN) -->
+    <div id="start-screen">
+      <div class="intro-box">
+        <div class="gift-icon-container">
+          <span class="gift-emoji">🎁</span>
+        </div>
+        <div class="intro-tagline">Dành Tặng Người Đặc Biệt 💙</div>
+        <h1 class="intro-title">Món Quà Sinh Nhật nhỏ cho Phúc Ngân</h1>
+        <p class="intro-desc">
+          Một bất ngờ nho nhỏ gửi tặng em 
+        </p>
+        
+        <!-- NÚT START MÀU XANH ĐẬM -->
+        <button id="start-btn" class="start-btn" type="button">
+          <span>START</span>
+          <span>✨</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- HIỆU ỨNG CHUYỂN CẢNH (TRANSITION CURTAIN) -->
+    <div id="transition-curtain">
+      <div class="burst-circle" id="burst-circle"></div>
+    </div>
+
+    <!-- MÀN HÌNH CHÍNH (MAIN CELEBRATION SCREEN) -->
+    <main id="main-screen">
+      <div class="celebration-container">
+        <!-- Header & Tên bạn gái -->
+        <header class="birthday-header">
+          <div class="birthday-badge">
+            <span>🎂</span>
+            <span>HAPPY BIRTHDAY</span>
+            <span>💙</span>
+          </div>
+          <div class="title-happy">Chúc Mừng Sinh Nhật</div>
+          <h1 id="gf-name" class="girlfriend-name">Em Ngân bé é</h1>
+        </header>
+
+        <!-- Bánh sinh nhật màu xanh tương tác -->
+        <section class="cake-section" aria-label="Bánh sinh nhật">
+          <div class="cake-wrapper" id="cake-wrapper">
+            <!-- Nến -->
+            <div class="candle">
+              <div class="candle-stripe"></div>
+              <div class="candle-stripe two"></div>
+              <div class="wick"></div>
+              <div class="flame" id="candle-flame"></div>
+              <div class="smoke" id="candle-smoke"></div>
+            </div>
+
+            <!-- Tầng trên -->
+            <div class="cake-layer-top">
+              <div class="cake-frosting"></div>
+            </div>
+
+            <!-- Tầng dưới -->
+            <div class="cake-layer-bottom">
+              <div class="cake-decor-dot"></div>
+              <div class="cake-decor-dot"></div>
+              <div class="cake-decor-dot"></div>
+              <div class="cake-decor-dot"></div>
+            </div>
+
+            <!-- Đĩa bánh -->
+            <div class="cake-plate"></div>
+          </div>
+          
+          <div class="candle-hint" id="candle-hint">
+            <span></span>
+            <span>Bấm vào nến để thổi và ước một điều ước!</span>
+          </div>
+        </section>
+
+        <!-- Khung thiệp chứa lời chúc (Text tự điền) -->
+        <article class="wish-card" id="wish-card">
+          <div class="card-top-icon">
+            <span class="card-date" id="birthday-date">Ngày đặc biệt nhất trong năm</span>
+            <span class="card-heart-tag">💙</span>
+          </div>
+
+          <!-- Nội dung lời chúc chạy hiệu ứng Typewriter -->
+          <div class="letter-content" id="letter-content">
+            <!-- Text sẽ được hiển thị tại đây -->
+          </div>
+
+          <!-- Ký tên -->
+          <div class="letter-signature">
+            <span class="sig-label">Gửi trọn yêu thương từ:</span>
+            <span class="sig-name" id="sig-name">Người yêu em</span>
+          </div>
+        </article>
+      </div>
+    </main>
+
+    <!-- MODAL TÙY CHỈNH NỘI DUNG (DỄ DÀNG TỰ ĐIỀN) -->
+    <div id="edit-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title" id="modal-title"> Điền lời chúc của bạn</h2>
+          <button class="close-modal-btn" id="close-modal-btn" aria-label="Đóng">&times;</button>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="input-name">Tên / Biệt danh bạn gái:</label>
+          <input class="form-input" id="input-name" type="text" placeholder="Ví dụ: Em Bé, Công Chúa, Quỳnh Anh..." />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="input-date">Ngày sinh nhật / Dịp kỷ niệm:</label>
+          <input class="form-input" id="input-date" type="text" placeholder="Ví dụ: 18/08, Ngày đặc biệt..." />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="input-sender">Tên của bạn (Ký tên):</label>
+          <input class="form-input" id="input-sender" type="text" placeholder="Ví dụ: Anh yêu của em..." />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="input-message">Đoạn văn lời chúc sinh nhật:</label>
+          <textarea class="form-textarea" id="input-message" placeholder="Nhập những lời chúc chân thành nhất của bạn dành cho người ấy..."></textarea>
+        </div>
+
+        <div class="modal-footer">
+          <button class="btn-secondary" id="reset-config-btn" type="button">Khôi phục mẫu</button>
+          <button class="btn-secondary" id="cancel-modal-btn" type="button">Hủy</button>
+          <button class="btn-primary" id="save-config-btn" type="button">Lưu & Hiển thị 💙</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Script JavaScript thuần -->
+    <script src="src/script.js"></script>
+  </body>
+</html>
+
